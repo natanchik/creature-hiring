@@ -1,0 +1,107 @@
+[
+  {
+    "id": 0,
+    "title": "Name_0",
+    "img": "img/0.png",
+    "prices": ["30", "15", "25"],
+    "group": "brain"
+  },
+  {
+    "id": 1,
+    "title": "Name_1",
+    "img": "img/1.png",
+    "prices": ["50", "40", "30"],
+    "group": "brain"
+  },
+  {
+    "id": 2,
+    "title": "Name_2",
+    "img": "img/2.png",
+    "prices": ["60", "40"],
+    "group": "brain"
+  },
+  {
+    "id": 3,
+    "title": "Name_3",
+    "img": "img/3.png",
+    "prices": ["90", "80", "70"],
+    "group": "brain"
+  },
+  {
+    "id": 4,
+    "title": "Name_4",
+    "img": "img/4.png",
+    "prices": ["100", "60", "40"],
+    "group": "mail"
+  },
+  {
+    "id": 5,
+    "title": "Name_5",
+    "img": "img/5.png",
+    "prices": ["150", "100"],
+    "group": "mail"
+  },
+  {
+    "id": 6,
+    "title": "Name_6",
+    "img": "img/6.png",
+    "prices": ["120", "130"],
+    "group": "mail"
+  },
+  {
+    "id": 7,
+    "title": "Name_7",
+    "img": "img/7.png",
+    "prices": ["25", "65"],
+    "group": "femail"
+  },
+  {
+    "id": 8,
+    "title": "Name_8",
+    "img": "img/8.png",
+    "prices": ["35", "45", "65"],
+    "group": "mail"
+  },
+  {
+    "id": 9,
+    "title": "Name_9",
+    "img": "img/9.png",
+    "prices": ["35", "45", "65"],
+    "group": "brain"
+  },
+  {
+    "id": 10,
+    "title": "Name_10",
+    "img": "img/10.png",
+    "prices": ["35", "45", "65"],
+    "group": "brain"
+  },
+  {
+    "id": 11,
+    "title": "Name_11",
+    "img": "img/11.png",
+    "prices": ["35", "45", "65"],
+    "group": "creature"
+  },
+  {
+    "id": 12,
+    "title": "Name_12",
+    "img": "img/12.png",
+    "prices": ["35", "45", "65"],
+    "group": "creature"
+  },
+  {
+    "id": 13,
+    "title": "Name_13",
+    "img": "img/13.png",
+    "prices": ["35", "45", "65"],
+    "group": "creature"
+  },
+  {
+    "id": 14,
+    "title": "Name_14",
+    "img": "img/14.png",
+    "prices": ["35", "45", "65"],
+    "group": "creature"
+  }
+]
