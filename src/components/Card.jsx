@@ -6,7 +6,7 @@ function Card({ title, img, prices }) {
   return (
     <div className='card'>
       <h4>{title}</h4>
-      <img src={img} className='card__img' />
+      <img src={img} alt={title} className='card__img' />
       <div className='card__prices'>
         {prices.map((price, index) => (
           <p
