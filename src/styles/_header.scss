@@ -27,14 +27,18 @@
     & > * {
       width: fit-content;
       height: fit-content;
-      padding: 7px 10px;
-      margin: 0 0 0 20px;
+      padding: 4px 10px 6px;
+      margin: 0;
       background-color: $light;
       text-decoration: none;
       list-style: none;
       color: black;
       border: 1px solid $border;
       border-radius: 10px;
+
+      &:last-child {
+        margin: 0 0 0 20px;
+      }
     }
   }
 }

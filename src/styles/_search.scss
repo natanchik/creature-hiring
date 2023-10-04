@@ -1,0 +1,28 @@
+.search {
+  position: relative;
+}
+
+.search__input {
+  padding: 5px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.search__img {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.search__clear {
+  position: absolute;
+  top: 1px;
+  right: 25px;
+  opacity: 60%;
+  cursor: pointer;
+}

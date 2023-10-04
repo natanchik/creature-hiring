@@ -1,0 +1,49 @@
+.Sort {
+  display: inline-block;
+  position: relative;
+  margin: 0 20px;
+  width: fit-content;
+}
+
+.sort__title {
+  height: fit-content;
+
+  & .sort__list {
+    display: inline-block;
+    width: 45px;
+    margin: 5px;
+    text-decoration: underline;
+    color: $dark;
+    cursor: pointer;
+  }
+
+  .sort__order {
+    cursor: pointer;
+  }
+}
+
+.sort__block {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  padding: 10px;
+  background-color: $dark;
+  border-radius: 5px;
+  z-index: 10;
+
+  &.open {
+    display: block;
+  }
+
+  & > * {
+    list-style: none;
+    padding: 4px;
+    cursor: pointer;
+  }
+
+  & .active {
+    border-radius: 5px;
+    background-color: $ultra-light;
+  }
+}
