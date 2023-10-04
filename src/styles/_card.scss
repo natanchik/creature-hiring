@@ -1,0 +1,32 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  justify-content: space-between;
+}
+
+.card {
+  display: inline-block;
+  border: 1px solid $border;
+  text-align: center;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.card__img {
+  width: 200px;
+  height: 200px;
+}
+
+.card__prices {
+  display: flex;
+  justify-content: space-around;
+
+  & > * {
+    display: inline-block;
+    flex-grow: 1;
+    border: 1px solid $light;
+    padding: 2px 20px;
+    background-color: $ultra-light;
+  }
+}

@@ -8,14 +8,17 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = React.useState(0);
 
-  const categories = ['All', 'Mail', 'Femail', 'Brain', 'Creature'];
+  const categories = ['All', 'Mail', 'Woman', 'Brain', 'Creature'];
 
   React.useEffect(() => {
-    fetch('https://651af710340309952f0e1bc8.mockapi.io/cards')
+    setIsLoading(true);
+    const baseURL = 'https://651af710340309952f0e1bc8.mockapi.io/cards';
+    const categoryUrl = activeCategory ? `?group=${categories[activeCategory]}` : '';
+    fetch(baseURL + categoryUrl)
       .then((res) => res.json())
       .then((res) => setItems(res))
-      .then(() => setTimeout(setIsLoading(false), 3000));
-  }, []);
+      .then(() => setTimeout(setIsLoading(false), 2000));
+  }, [activeCategory]);
 
   return (
     <div className='Home'>

@@ -1,0 +1,40 @@
+.Header {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0;
+  padding: 10px 20px;
+  background-color: $dark;
+  height: 50px;
+
+  & > * {
+    display: inline-block;
+  }
+
+  & .logo {
+    width: 50px;
+    height: 50px;
+    border: 1px solid $border;
+    border-radius: 10px;
+  }
+
+  & .menu {
+    width: fit-content;
+    margin: 0;
+
+    & > * {
+      width: fit-content;
+      height: fit-content;
+      padding: 7px 10px;
+      margin: 0 0 0 20px;
+      background-color: $light;
+      text-decoration: none;
+      list-style: none;
+      color: black;
+      border: 1px solid $border;
+      border-radius: 10px;
+    }
+  }
+}

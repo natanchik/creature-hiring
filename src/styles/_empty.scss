@@ -1,0 +1,14 @@
+.Cart,
+.NotFound {
+  margin: 0 auto;
+  padding: 50px;
+  text-align: center;
+
+  & .cart__empty__img,
+  & .not-found__img {
+    display: block;
+    width: 400px;
+    height: fit-content;
+    margin: 0 auto;
+  }
+}
