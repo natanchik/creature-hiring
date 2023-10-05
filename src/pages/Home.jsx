@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { SearchContext } from '../App';
 
 import Card from '../components/Card';
 import Sort from '../components/Sort';
 import Sceleton from '../components/Sceleton';
 import Pagination from '../components/pagination';
 
-function Home({ searchValue }) {
+function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = React.useState(0);
   const [sortInd, setSortInd] = React.useState(0);
   const [sortDir, setsortDir] = useState(true);
   const [page, setPage] = useState(1);
+  const { searchValue } = useContext(SearchContext);
 
   const categories = ['All', 'Mail', 'Woman', 'Brain', 'Creature'];
   const sortItems = ['rating', 'name', 'group'];

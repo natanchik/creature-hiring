@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 import Search from './search';
 
-function Header({ searchValue, setSearchValue }) {
+function Header() {
   return (
     <div className='Header'>
       <Link to='/'>
         <img src='img/logo.png' alt='logo' className='logo' />
       </Link>
       <h2 className='header__title'>CREATURE HIRING</h2>
-      <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+      <Search />
       <nav className='menu'>
         <Link to='/cart'>
           <span className='menu__item'>Cart</span>
