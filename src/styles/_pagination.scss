@@ -7,9 +7,14 @@
     padding: 5px;
     margin: 10px;
     width: fit-content;
+  }
+
+  .page {
+    cursor: pointer;
 
     &.disable {
       opacity: 40%;
+      cursor: auto;
     }
   }
 }

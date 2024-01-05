@@ -1,82 +1,71 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { SearchContext } from '../App';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategory, resetPage } from '../redux/slices/filterSlice';
 
 import Card from '../components/Card';
 import Sort from '../components/Sort';
 import Sceleton from '../components/Sceleton';
 import Pagination from '../components/pagination';
+import { BASEURL, CATEGORIES } from '../components/constants';
 
 function Home() {
-  const [items, setItems] = useState([]);
+  const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = React.useState(0);
-  const [sortInd, setSortInd] = React.useState(0);
-  const [sortDir, setsortDir] = useState(true);
-  const [page, setPage] = useState(1);
   const { searchValue } = useContext(SearchContext);
 
-  const categories = ['All', 'Mail', 'Woman', 'Brain', 'Creature'];
-  const sortItems = ['rating', 'name', 'group'];
+  const page = useSelector((state) => state.filter.page);
+  const sortBy = useSelector((state) => state.filter.sortBy);
+  const order = useSelector((state) => state.filter.order);
+  const category = useSelector((state) => state.filter.category);
+  const dispatch = useDispatch();
 
-  async function getItems() {
-    const baseURL = 'https://651af710340309952f0e1bc8.mockapi.io/cards';
-    const categoryUrl = activeCategory ? `group=${categories[activeCategory]}` : '';
-    const sortByUrl = `sortBy=${sortItems[sortInd]}`;
-    const order = sortDir ? '&order=asc' : '&order=desc';
+  const getCards = useCallback(async () => {
+    const categoryUrl = category === 'All' ? '' : `group=${category}`;
     const searchUrl = searchValue ? `search=${searchValue}` : '';
-    const currentPage = `limit=4&page=${page}`;
+    const currentPage = `?limit=4&page=${page}`;
 
-    fetch([baseURL, [currentPage, categoryUrl, searchUrl, sortByUrl, order].join('&')].join('?'), {
+    fetch(BASEURL + [currentPage, categoryUrl, searchUrl, `sortBy=${sortBy}`, `order=${order}`].join('&'), {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
       .then((res) => res.json())
-      .then((res) => setItems(res))
+      .then((res) => {
+        setCards(res);
+      })
       .then(() => setIsLoading(false));
-  }
+  }, [category, sortBy, order, searchValue, page]);
 
-  function changeCategory(index) {
-    setActiveCategory(index);
-    setPage(1);
-  }
-
-  function changeSort(index) {
-    setSortInd(index);
-    setPage(1);
+  function changeCategory(item) {
+    dispatch(setCategory(item));
+    dispatch(resetPage());
   }
 
   React.useEffect(() => {
-    setIsLoading(true);
-    getItems();
-  }, [activeCategory, sortInd, sortDir, searchValue, page]);
+    const func = async () => {
+      setIsLoading(true);
+      await getCards();
+    };
+    func();
+  }, [category, sortBy, order, searchValue, page, getCards]);
 
   return (
     <div className='Home'>
       <div className='home__header'>
         <div className='categories'>
-          {categories.map((category, index) => (
-            <span
-              key={index}
-              onClick={() => changeCategory(index)}
-              className={activeCategory === index ? 'active' : ''}
-            >
-              {category}
+          {CATEGORIES.map((item, index) => (
+            <span key={index} onClick={() => changeCategory(item)} className={category === item ? 'active' : ''}>
+              {item}
             </span>
           ))}
         </div>
-        <Sort
-          sortItems={sortItems}
-          sortInd={sortInd}
-          setSortInd={(i) => changeSort(i)}
-          sortDir={sortDir}
-          setsortDir={setsortDir}
-        />
+        <Sort />
       </div>
 
       <div className='cards'>
         {isLoading
-          ? [...new Array(4)].map((_, ind) => <Sceleton className='card' key={ind} />)
-          : items.map((card) => (
+          ? [1, 2, 3, 4].map((_, ind) => <Sceleton className='card' key={ind} />)
+          : cards.map((card) => (
               <Card
                 key={'card-' + card.id}
                 className='card'
@@ -87,7 +76,7 @@ function Home() {
               />
             ))}
       </div>
-      <Pagination page={page} setPage={setPage} />
+      <Pagination />
     </div>
   );
 }

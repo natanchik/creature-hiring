@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortBy, setOrder, resetPage } from '../redux/slices/filterSlice';
+import { SORTBYITEMS } from './constants';
 
-function Sort({ sortItems, sortInd, setSortInd, sortDir, setsortDir }) {
+function Sort() {
   const [openPopup, setOpenPopup] = useState(false);
+  const sortBy = useSelector((state) => state.filter.sortBy);
+  const order = useSelector((state) => state.filter.order);
+  const dispatch = useDispatch();
 
-  function changeItem(index) {
-    setSortInd(index);
+  function changeSortBy(item) {
+    dispatch(setSortBy(item));
+    dispatch(resetPage());
     setOpenPopup(!openPopup);
   }
 
@@ -13,15 +20,15 @@ function Sort({ sortItems, sortInd, setSortInd, sortDir, setsortDir }) {
       <span className='sort__title'>
         Sort by
         <b className='sort__list' onClick={() => setOpenPopup(!openPopup)}>
-          {sortItems[sortInd]}
+          {sortBy}
         </b>
-        <span className='sort__order' onClick={() => setsortDir(!sortDir)}>
-          {sortDir ? <b>&#8593;</b> : <b>&#8595;</b>}
+        <span className='sort__order' onClick={() => dispatch(setOrder(order === 'asc' ? 'desc' : 'asc'))}>
+          {order === 'asc' ? <b>&#8593;</b> : <b>&#8595;</b>}
         </span>
       </span>
       <ul className={openPopup ? 'sort__block open' : 'sort__block'}>
-        {sortItems.map((item, index) => (
-          <li key={index} onClick={() => changeItem(index)} className={sortInd === index ? 'active' : ''}>
+        {SORTBYITEMS.map((item) => (
+          <li key={item} onClick={() => changeSortBy(item)} className={sortBy === item ? 'active' : ''}>
             {item}
           </li>
         ))}
