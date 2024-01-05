@@ -13,11 +13,7 @@ function Home() {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { searchValue } = useContext(SearchContext);
-
-  const page = useSelector((state) => state.filter.page);
-  const sortBy = useSelector((state) => state.filter.sortBy);
-  const order = useSelector((state) => state.filter.order);
-  const category = useSelector((state) => state.filter.category);
+  const { page, sortBy, order, category } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const getCards = useCallback(async () => {

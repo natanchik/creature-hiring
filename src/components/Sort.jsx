@@ -5,8 +5,7 @@ import { SORTBYITEMS } from './constants';
 
 function Sort() {
   const [openPopup, setOpenPopup] = useState(false);
-  const sortBy = useSelector((state) => state.filter.sortBy);
-  const order = useSelector((state) => state.filter.order);
+  const { sortBy, order } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   function changeSortBy(item) {
