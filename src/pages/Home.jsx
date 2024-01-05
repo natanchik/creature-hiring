@@ -2,6 +2,7 @@ import React, { useState, useContext, useCallback } from 'react';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, resetPage } from '../redux/slices/filterSlice';
+import axios from 'axios';
 
 import Card from '../components/Card';
 import Sort from '../components/Sort';
@@ -20,14 +21,9 @@ function Home() {
     const categoryUrl = category === 'All' ? '' : `&group=${category}`;
     const searchUrl = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(`${BASEURL}?limit=4&page=${page}${categoryUrl}${searchUrl}&sortBy=${sortBy}&order=${order}`, {
-      method: 'GET',
-      headers: { 'content-type': 'application/json' },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setCards(res);
-      })
+    axios
+      .get(`${BASEURL}?limit=4&page=${page}${categoryUrl}${searchUrl}&sortBy=${sortBy}&order=${order}`)
+      .then((res) => setCards(res.data))
       .then(() => setIsLoading(false))
       .catch((err) => console.error(err));
   }, [category, sortBy, order, searchValue, page]);
