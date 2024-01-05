@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSortBy, setOrder, resetPage } from '../redux/slices/filterSlice';
+import { setSortBy, setOrder, setPage } from '../redux/slices/filterSlice';
 import { SORTBYITEMS } from './constants';
 
 function Sort() {
@@ -10,7 +10,7 @@ function Sort() {
 
   function changeSortBy(item) {
     dispatch(setSortBy(item));
-    dispatch(resetPage());
+    dispatch(setPage(1));
     setOpenPopup(!openPopup);
   }
 

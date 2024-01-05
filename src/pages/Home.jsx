@@ -1,7 +1,7 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, resetPage } from '../redux/slices/filterSlice';
+import { setCategory, setPage } from '../redux/slices/filterSlice';
 import axios from 'axios';
 
 import Card from '../components/Card';
@@ -30,7 +30,7 @@ function Home() {
 
   function changeCategory(item) {
     dispatch(setCategory(item));
-    dispatch(resetPage());
+    dispatch(setPage(1));
   }
 
   React.useEffect(() => {
@@ -57,7 +57,8 @@ function Home() {
       <div className='cards'>
         {isLoading
           ? [...new Array(4)].map((_, ind) => <Sceleton className='card' key={ind} />)
-          : cards.map((card) => (
+          : cards &&
+            cards.map((card) => (
               <Card
                 key={`card-${card.id}`}
                 className='card'

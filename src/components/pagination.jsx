@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { nextPage, prevPage } from '../redux/slices/filterSlice';
+import { setPage } from '../redux/slices/filterSlice';
 
 function Pagination() {
   const page = useSelector((state) => state.filter.page);
@@ -8,11 +8,17 @@ function Pagination() {
 
   return (
     <div className='Pagination'>
-      <span className={page === 1 ? 'disable page' : 'page'} onClick={() => dispatch(prevPage())}>
+      <span
+        className={page === 1 ? 'disable page' : 'page'}
+        onClick={() => (page === 1 ? null : dispatch(setPage(page - 1)))}
+      >
         &#x3c;
       </span>
       <span>{page}</span>
-      <span className={page === 4 ? 'disable page' : 'page'} onClick={() => dispatch(nextPage())}>
+      <span
+        className={page === 4 ? 'disable page' : 'page'}
+        onClick={() => (page === 4 ? null : dispatch(setPage(page + 1)))}
+      >
         &#x3e;
       </span>
     </div>

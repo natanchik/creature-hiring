@@ -1,13 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useState, useRef } from 'react';
 import { SearchContext } from '../App';
+import debounce from 'lodash.debounce';
 
 function Search() {
   const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [search, setSearch] = useState('');
+  const inputRef = useRef();
+
+  const debounceSearch = useCallback(
+    debounce((text) => setSearchValue(text), 500),
+    [],
+  );
+
+  function onChangeSearch(event) {
+    setSearch(event.target.value);
+    debounceSearch(event.target.value);
+  }
+
+  function onClickClear() {
+    setSearch('');
+    setSearchValue('');
+    inputRef.current.focus();
+  }
+
   return (
     <div className='search'>
       <input
-        value={searchValue}
-        onChange={(event) => setSearchValue(event.target.value)}
+        ref={inputRef}
+        value={search}
+        onChange={onChangeSearch}
         className='search__input'
         placeholder='Search creature...'
       />
@@ -15,7 +36,7 @@ function Search() {
         <img className='search__img' alt='Search' src='img/glass.svg' />
       </span>
       {searchValue && (
-        <span onClick={() => setSearchValue('')} className='search__clear'>
+        <span onClick={onClickClear} className='search__clear'>
           &#10006;
         </span>
       )}
