@@ -27,6 +27,7 @@ function Search() {
     <div className='search'>
       <input
         ref={inputRef}
+        name='search'
         value={search}
         onChange={onChangeSearch}
         className='search__input'

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setPage } from '../redux/slices/filterSlice';
 
 function Pagination() {
-  const page = useSelector((state) => state.filter.page);
+  const { page, maxPage } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   return (
@@ -16,8 +16,8 @@ function Pagination() {
       </span>
       <span>{page}</span>
       <span
-        className={page === 4 ? 'disable page' : 'page'}
-        onClick={() => (page === 4 ? null : dispatch(setPage(page + 1)))}
+        className={page === maxPage ? 'disable page' : 'page'}
+        onClick={() => (page === maxPage ? null : dispatch(setPage(page + 1)))}
       >
         &#x3e;
       </span>

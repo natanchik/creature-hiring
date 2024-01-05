@@ -1,7 +1,7 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setPage } from '../redux/slices/filterSlice';
+import { setCategory, setPage, setMaxPage } from '../redux/slices/filterSlice';
 import axios from 'axios';
 
 import Card from '../components/Card';
@@ -18,15 +18,20 @@ function Home() {
   const dispatch = useDispatch();
 
   const getCards = useCallback(async () => {
-    const categoryUrl = category === 'All' ? '' : `&group=${category}`;
-    const searchUrl = searchValue ? `&search=${searchValue}` : '';
+    const categoryUrl = category === 'All' ? '' : `&category=${category.toLowerCase()}`;
+    const searchUrl = searchValue ? `&name=*${searchValue}*` : '';
+    const orderBy = order === 'asc' ? '' : '-';
 
     axios
-      .get(`${BASEURL}?limit=4&page=${page}${categoryUrl}${searchUrl}&sortBy=${sortBy}&order=${order}`)
-      .then((res) => setCards(res.data))
+      .get(`${BASEURL}?limit=4&page=${page}${categoryUrl}${searchUrl}&sortBy=${orderBy}${sortBy}`)
+      .then((res) => {
+        console.log(res);
+        setCards(res.data.items);
+        dispatch(setMaxPage(res.data.meta.total_pages));
+      })
       .then(() => setIsLoading(false))
       .catch((err) => console.error(err));
-  }, [category, sortBy, order, searchValue, page]);
+  }, [category, sortBy, order, searchValue, page, dispatch]);
 
   function changeCategory(item) {
     dispatch(setCategory(item));
@@ -62,8 +67,8 @@ function Home() {
               <Card
                 key={`card-${card.id}`}
                 className='card'
+                id={card.id}
                 title={card.name}
-                img={card.img}
                 prices={card.prices}
                 rating={card.rating}
               />

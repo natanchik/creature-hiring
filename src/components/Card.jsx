@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card({ title, img, prices, rating }) {
+function Card({ id, title, prices, rating }) {
   const [activePrice, setActivePrice] = React.useState(0);
 
   return (
@@ -8,7 +8,7 @@ function Card({ title, img, prices, rating }) {
       <h4>
         {title} <b>&#11088;</b> {rating}
       </h4>
-      <img src={img} alt={title} className='card__img' />
+      <img src={`img/${id}.png`} alt={title} className='card__img' />
       <div className='card__prices'>
         {prices.map((price, index) => (
           <p

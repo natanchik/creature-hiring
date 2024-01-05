@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   page: 1,
+  maxPage: 1,
   category: 'All',
   sortBy: 'rating',
   order: 'asc',
@@ -11,14 +12,11 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    // nextPage: (state) => {
-    //   state.page = state.page === 4 ? state.page : state.page + 1;
-    // },
-    // prevPage: (state) => {
-    //   state.page = state.page === 1 ? 1 : state.page - 1;
-    // },
     setPage: (state, action) => {
       state.page = action.payload;
+    },
+    setMaxPage: (state, action) => {
+      state.maxPage = action.payload;
     },
     setCategory: (state, action) => {
       state.category = action.payload;
@@ -32,6 +30,6 @@ export const filterSlice = createSlice({
   },
 });
 
-export const { setPage, setCategory, setSortBy, setOrder } = filterSlice.actions;
+export const { setPage, setMaxPage, setCategory, setSortBy, setOrder } = filterSlice.actions;
 
 export default filterSlice.reducer;
