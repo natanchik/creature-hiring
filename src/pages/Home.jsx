@@ -17,11 +17,10 @@ function Home() {
   const dispatch = useDispatch();
 
   const getCards = useCallback(async () => {
-    const categoryUrl = category === 'All' ? '' : `group=${category}`;
-    const searchUrl = searchValue ? `search=${searchValue}` : '';
-    const currentPage = `?limit=4&page=${page}`;
+    const categoryUrl = category === 'All' ? '' : `&group=${category}`;
+    const searchUrl = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(BASEURL + [currentPage, categoryUrl, searchUrl, `sortBy=${sortBy}`, `order=${order}`].join('&'), {
+    fetch(`${BASEURL}?limit=4&page=${page}${categoryUrl}${searchUrl}&sortBy=${sortBy}&order=${order}`, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
@@ -29,7 +28,8 @@ function Home() {
       .then((res) => {
         setCards(res);
       })
-      .then(() => setIsLoading(false));
+      .then(() => setIsLoading(false))
+      .catch((err) => console.error(err));
   }, [category, sortBy, order, searchValue, page]);
 
   function changeCategory(item) {
@@ -60,10 +60,10 @@ function Home() {
 
       <div className='cards'>
         {isLoading
-          ? [1, 2, 3, 4].map((_, ind) => <Sceleton className='card' key={ind} />)
+          ? [...new Array(4)].map((_, ind) => <Sceleton className='card' key={ind} />)
           : cards.map((card) => (
               <Card
-                key={'card-' + card.id}
+                key={`card-${card.id}`}
                 className='card'
                 title={card.name}
                 img={card.img}
