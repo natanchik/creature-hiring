@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   page: 1,
   maxPage: 1,
+  perPage: 4,
   category: 'All',
   sortBy: 'rating',
   order: 'asc',

@@ -1,20 +1,21 @@
 import React, { useState, useContext, useCallback } from 'react';
-import { SearchContext } from '../App';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setPage, setMaxPage } from '../redux/slices/filterSlice';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setMaxPage } from '../redux/slices/filterSlice';
+import { SearchContext } from '../App';
 
-import Card from '../components/Card';
+import Cards from '../components/Cards';
+import Categories from '../components/categories';
 import Sort from '../components/Sort';
-import Sceleton from '../components/Sceleton';
-import Pagination from '../components/pagination';
-import { BASEURL, CATEGORIES } from '../components/constants';
+import Sceletons from '../components/Sceletons';
+import Pagination from '../components/Pagination';
+import { BASEURL } from '../components/constants';
 
 function Home() {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { searchValue } = useContext(SearchContext);
-  const { page, sortBy, order, category } = useSelector((state) => state.filter);
+  const { page, sortBy, perPage, order, category } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const getCards = useCallback(async () => {
@@ -23,7 +24,7 @@ function Home() {
     const orderBy = order === 'asc' ? '' : '-';
 
     axios
-      .get(`${BASEURL}?limit=4&page=${page}${categoryUrl}${searchUrl}&sortBy=${orderBy}${sortBy}`)
+      .get(`${BASEURL}?limit=${perPage}&page=${page}${categoryUrl}${searchUrl}&sortBy=${orderBy}${sortBy}`)
       .then((res) => {
         console.log(res);
         setCards(res.data.items);
@@ -31,12 +32,7 @@ function Home() {
       })
       .then(() => setIsLoading(false))
       .catch((err) => console.error(err));
-  }, [category, sortBy, order, searchValue, page, dispatch]);
-
-  function changeCategory(item) {
-    dispatch(setCategory(item));
-    dispatch(setPage(1));
-  }
+  }, [category, perPage, sortBy, order, searchValue, page, dispatch]);
 
   React.useEffect(() => {
     const func = async () => {
@@ -44,36 +40,16 @@ function Home() {
       await getCards();
     };
     func();
-  }, [category, sortBy, order, searchValue, page, getCards]);
+  }, [category, perPage, sortBy, order, searchValue, page, getCards]);
 
   return (
     <div className='Home'>
       <div className='home__header'>
-        <div className='categories'>
-          {CATEGORIES.map((item, index) => (
-            <span key={index} onClick={() => changeCategory(item)} className={category === item ? 'active' : ''}>
-              {item}
-            </span>
-          ))}
-        </div>
+        <Categories />
         <Sort />
       </div>
 
-      <div className='cards'>
-        {isLoading
-          ? [...new Array(4)].map((_, ind) => <Sceleton className='card' key={ind} />)
-          : cards &&
-            cards.map((card) => (
-              <Card
-                key={`card-${card.id}`}
-                className='card'
-                id={card.id}
-                title={card.name}
-                prices={card.prices}
-                rating={card.rating}
-              />
-            ))}
-      </div>
+      <div className='cards'>{isLoading ? <Sceletons /> : cards && <Cards cards={cards} />}</div>
       <Pagination />
     </div>
   );

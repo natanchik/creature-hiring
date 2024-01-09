@@ -1,122 +1,17 @@
 [
-  {
-    "id": 0,
-    "name": "Puzzled Brain",
-    "img": "img/0.png",
-    "prices": ["30", "15", "25"],
-    "group": "brain",
-    "rating": 5
-  },
-  {
-    "id": 1,
-    "name": "Training Brain",
-    "img": "img/1.png",
-    "prices": ["50", "40", "30"],
-    "group": "brain",
-    "rating": 6
-  },
-  {
-    "id": 2,
-    "name": "Query Brain",
-    "img": "img/2.png",
-    "prices": ["60", "40"],
-    "group": "brain",
-    "rating": 8
-  },
-  {
-    "id": 3,
-    "name": "Lightning Brain",
-    "img": "img/3.png",
-    "prices": ["90", "80", "70"],
-    "group": "brain",
-    "rating": 7
-  },
-  {
-    "id": 4,
-    "name": "Query Boy",
-    "img": "img/4.png",
-    "prices": ["100", "60", "40"],
-    "group": "mail",
-    "rating": 4
-  },
-  {
-    "id": 5,
-    "name": "Wow Man",
-    "img": "img/5.png",
-    "prices": ["150", "100"],
-    "group": "mail",
-    "rating": 3
-  },
-  {
-    "id": 6,
-    "name": "Ok Man",
-    "img": "img/6.png",
-    "prices": ["120", "130"],
-    "group": "mail",
-    "rating": 2
-  },
-  {
-    "id": 7,
-    "name": "Query Woman",
-    "img": "img/7.png",
-    "prices": ["25", "65"],
-    "group": "woman",
-    "rating": 1
-  },
-  {
-    "id": 8,
-    "name": "Query Man",
-    "img": "img/8.png",
-    "prices": ["35", "45", "65"],
-    "group": "mail",
-    "rating": 10
-  },
-  {
-    "id": 9,
-    "name": "Angry Brain",
-    "img": "img/9.png",
-    "prices": ["35", "45", "65"],
-    "group": "brain",
-    "rating": 12
-  },
-  {
-    "id": 10,
-    "name": "Clever Brain",
-    "img": "img/10.png",
-    "prices": ["35", "45", "65"],
-    "group": "brain",
-    "rating": 11
-  },
-  {
-    "id": 11,
-    "name": "Purple Slug",
-    "img": "img/11.png",
-    "prices": ["35", "45", "65"],
-    "group": "creature",
-    "rating": 13
-  },
-  {
-    "id": 12,
-    "name": "Yellow Ball",
-    "img": "img/12.png",
-    "prices": ["35", "45", "65"],
-    "group": "creature",
-    "rating": 15
-  },
-  {
-    "id": 13,
-    "name": "Red Monster",
-    "img": "img/13.png",
-    "prices": ["35", "45", "65"],
-    "group": "creature",
-    "rating": 14
-  },
-  {
-    "id": 14,
-    "name": "Green Ball",
-    "img": "img/14.png",
-    "prices": ["35", "45", "65"],
-    "group": "creature",
-    "rating": 9
-  }
+  { "id": 0, "name": "Puzzled Brain", "prices": ["30", "15", "25"], "category": "brain", "rating": 5 },
+  { "id": 1, "name": "Training Brain", "prices": ["50", "40", "30"], "category": "brain", "rating": 6 },
+  { "id": 2, "name": "Query Brain", "prices": ["60", "40"], "category": "brain", "rating": 8 },
+  { "id": 3, "name": "Lightning Brain", "prices": ["90", "80", "70"], "category": "brain", "rating": 7 },
+  { "id": 4, "name": "Query Boy", "prices": ["100", "60", "40"], "category": "mail", "rating": 4 },
+  { "id": 5, "name": "Wow Man", "prices": ["150", "100"], "category": "mail", "rating": 3 },
+  { "id": 6, "name": "Ok Man", "prices": ["120", "130"], "category": "mail", "rating": 2 },
+  { "id": 7, "name": "Query Woman", "prices": ["25", "65"], "category": "woman", "rating": 1 },
+  { "id": 8, "name": "Query Man", "prices": ["35", "45", "65"], "category": "mail", "rating": 10 },
+  { "id": 9, "name": "Angry Brain", "prices": ["35", "45", "65"], "category": "brain", "rating": 12 },
+  { "id": 10, "name": "Clever Brain", "prices": ["35", "45", "65"], "category": "brain", "rating": 11 },
+  { "id": 11, "name": "Purple Slug", "prices": ["35", "45", "65"], "category": "creature", "rating": 13 },
+  { "id": 12, "name": "Yellow Ball", "prices": ["35", "45", "65"], "category": "creature", "rating": 15 },
+  { "id": 13, "name": "Red Monster", "prices": ["35", "45", "65"], "category": "creature", "rating": 14 },
+  { "id": 14, "name": "Green Ball", "prices": ["35", "45", "65"], "category": "creature", "rating": 9 }
 ]

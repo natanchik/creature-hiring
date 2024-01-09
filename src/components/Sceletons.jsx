@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader';
 
 const Sceleton = (props) => (
@@ -17,4 +18,16 @@ const Sceleton = (props) => (
   </ContentLoader>
 );
 
-export default Sceleton;
+const Sceletons = () => {
+  const { perPage } = useSelector((state) => state.filter);
+
+  return (
+    <>
+      {[...new Array(perPage)].map((_, ind) => (
+        <Sceleton className='card' key={ind} />
+      ))}
+    </>
+  );
+};
+
+export default Sceletons;
