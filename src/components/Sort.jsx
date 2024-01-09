@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortBy, setOrder, setPage } from '../redux/slices/filterSlice';
 import { SORTBYITEMS } from './constants';
@@ -7,6 +7,7 @@ function Sort() {
   const [openPopup, setOpenPopup] = useState(false);
   const { sortBy, order } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
+  const sortRef = useRef();
 
   function changeSortBy(item) {
     dispatch(setSortBy(item));
@@ -14,8 +15,18 @@ function Sort() {
     setOpenPopup(!openPopup);
   }
 
+  useEffect(() => {
+    const handlerClick = (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setOpenPopup(false);
+      }
+    };
+    document.body.addEventListener('click', handlerClick);
+    return () => document.body.removeEventListener('click', handlerClick);
+  }, []);
+
   return (
-    <div className='Sort'>
+    <div ref={sortRef} className='Sort'>
       <span className='sort__title'>
         Sort by
         <b className='sort__list' onClick={() => setOpenPopup(!openPopup)}>
